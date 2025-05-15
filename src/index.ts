@@ -4,14 +4,13 @@ import { z } from "zod";
 
 const server = new FastMCP({
   name: "mcp-puppeteer",
-  version: "1.0.0",
+  version: "1.0.2",
 });
 
-// 定义browser和page类型
 let browser: puppeteer.Browser | null = null;
 let page: puppeteer.Page | null = null;
 
-// 初始化浏览器工具
+// Initialize browser tool
 server.addTool({
   name: "mcp-puppeteer_initialize",
   description: "Initialize a Puppeteer browser instance in headless mode",
@@ -22,11 +21,11 @@ server.addTool({
       defaultViewport: { width: 1920, height: 1080 },
     });
     page = await browser.newPage();
-    return "浏览器实例已初始化";
+    return "Browser instance initialized";
   },
 });
 
-// 关闭浏览器工具
+// Close browser tool
 server.addTool({
   name: "mcp-puppeteer_close",
   description: "Close the Puppeteer browser instance",
@@ -36,13 +35,13 @@ server.addTool({
       await browser.close();
       browser = null;
       page = null;
-      return "浏览器已关闭";
+      return "Browser closed";
     }
-    return "没有活动的浏览器实例";
+    return "No active browser instance";
   },
 });
 
-// 导航到指定URL
+// Navigate to specified URL
 server.addTool({
   name: "mcp-puppeteer_navigate",
   description: "Navigate to a specified URL",
@@ -50,13 +49,13 @@ server.addTool({
     url: z.string(),
   }),
   execute: async (args) => {
-    if (!page) return "请先初始化浏览器";
+    if (!page) return "Please initialize browser first";
     await page.goto(args.url);
-    return `已导航到 ${args.url}`;
+    return `Navigated to ${args.url}`;
   },
 });
 
-// 截图功能
+// Screenshot functionality
 server.addTool({
   name: "mcp-puppeteer_screenshot",
   description: "Capture a screenshot of the current page",
@@ -64,13 +63,13 @@ server.addTool({
     path: z.string(),
   }),
   execute: async (args) => {
-    if (!page) return "请先初始化浏览器";
+    if (!page) return "Please initialize browser first";
     await page.screenshot({ path: args.path });
-    return `截图已保存至 ${args.path}`;
+    return `Screenshot saved to ${args.path}`;
   },
 });
 
-// 点击元素
+// Click element
 server.addTool({
   name: "mcp-puppeteer_click",
   description: "Click on an element specified by selector",
@@ -78,13 +77,13 @@ server.addTool({
     selector: z.string(),
   }),
   execute: async (args) => {
-    if (!page) return "请先初始化浏览器";
+    if (!page) return "Please initialize browser first";
     await page.click(args.selector);
-    return `已点击 ${args.selector}`;
+    return `Clicked on ${args.selector}`;
   },
 });
 
-// 填写表单
+// Fill form
 server.addTool({
   name: "mcp-puppeteer_fill",
   description: "Fill a text input with specified content",
@@ -93,13 +92,13 @@ server.addTool({
     text: z.string(),
   }),
   execute: async (args) => {
-    if (!page) return "请先初始化浏览器";
+    if (!page) return "Please initialize browser first";
     await page.type(args.selector, args.text);
-    return `已在 ${args.selector} 中填写文本`;
+    return `Text entered in ${args.selector}`;
   },
 });
 
-// 选择下拉菜单选项
+// Select dropdown option
 server.addTool({
   name: "mcp-puppeteer_select",
   description: "Select an option from a dropdown menu",
@@ -108,13 +107,13 @@ server.addTool({
     value: z.string(),
   }),
   execute: async (args) => {
-    if (!page) return "请先初始化浏览器";
+    if (!page) return "Please initialize browser first";
     await page.select(args.selector, args.value);
-    return `已在 ${args.selector} 中选择值 ${args.value}`;
+    return `Selected value ${args.value} in ${args.selector}`;
   },
 });
 
-// 悬停在元素上
+// Hover over element
 server.addTool({
   name: "mcp-puppeteer_hover",
   description: "Hover the mouse over a specified element",
@@ -122,13 +121,13 @@ server.addTool({
     selector: z.string(),
   }),
   execute: async (args) => {
-    if (!page) return "请先初始化浏览器";
+    if (!page) return "Please initialize browser first";
     await page.hover(args.selector);
-    return `已在 ${args.selector} 上悬停`;
+    return `Hovered over ${args.selector}`;
   },
 });
 
-// 执行JavaScript
+// Execute JavaScript
 server.addTool({
   name: "mcp-puppeteer_evaluate",
   description: "Execute JavaScript code in the page context",
@@ -136,7 +135,7 @@ server.addTool({
     script: z.string(),
   }),
   execute: async (args) => {
-    if (!page) return "请先初始化浏览器";
+    if (!page) return "Please initialize browser first";
     const result = await page.evaluate(args.script);
     return JSON.stringify(result);
   },

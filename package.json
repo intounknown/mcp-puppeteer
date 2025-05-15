@@ -1,6 +1,6 @@
 {
   "name": "@humansean/mcp-puppeteer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "bin": {
     "mcp-puppeteer": "./dist/index.js"
@@ -18,12 +18,12 @@
   ],
   "author": "HumanSean",
   "license": "MIT",
-  "description": "基于Puppeteer的MCP服务器，提供网页截图、交互等API接口",
+  "description": "A simple but helpful mcp server that based on puppeteer, providing browser ablities for llm models",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.9.0",
-    "fastmcp": "^1.21.0",
-    "puppeteer": "^24.6.1",
-    "zod": "^3.24.2"
+    "@modelcontextprotocol/sdk": "^1.11.2",
+    "fastmcp": "^1.27.6",
+    "puppeteer": "^24.8.2",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "typescript": "^5.8.3"
