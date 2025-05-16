@@ -1,10 +1,12 @@
+#!/usr/bin/env node
+
 import puppeteer from "puppeteer";
 import { FastMCP } from "fastmcp";
 import { z } from "zod";
 
 const server = new FastMCP({
   name: "mcp-puppeteer",
-  version: "1.0.2",
+  version: "1.0.4",
 });
 
 let browser: puppeteer.Browser | null = null;
