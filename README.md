@@ -10,7 +10,7 @@ MCP-Puppeteer is a tool that exposes Puppeteer's web automation capabilities thr
 
 | Tool Name                  | Description                                              | Parameters                                                                          |
 | -------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `mcp-puppeteer_initialize` | Initialize a Puppeteer browser instance in headless mode | None                                                                                |
+| `mcp-puppeteer_initialize` | Initialize a Puppeteer browser instance in headless mode | `args`: Optional array of browser launch arguments                                  |
 | `mcp-puppeteer_close`      | Close the Puppeteer browser instance                     | None                                                                                |
 | `mcp-puppeteer_navigate`   | Navigate to a specified URL                              | `url`: The URL to navigate to                                                       |
 | `mcp-puppeteer_screenshot` | Capture a screenshot of the current page                 | `path`: File path to save the screenshot                                            |
