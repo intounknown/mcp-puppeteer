@@ -6,7 +6,7 @@ import { z } from "zod";
 
 const server = new FastMCP({
   name: "mcp-puppeteer",
-  version: "1.0.5",
+  version: "1.0.7",
 });
 
 let browser: puppeteer.Browser | null = null;
@@ -19,11 +19,11 @@ server.addTool({
   parameters: z.object({
     args: z.array(z.string()).optional(),
   }),
-  execute: async () => {
+  execute: async ({ args }) => {
     browser = await puppeteer.launch({
       headless: true,
       defaultViewport: { width: 1920, height: 1080 },
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      args,
     });
     page = await browser.newPage();
     return "Browser instance initialized";
